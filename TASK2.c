@@ -8,20 +8,28 @@ int main() {
 
     str = (char*)malloc(100 * sizeof(char));
     if (str == NULL) {
+        printf("Memory allocation failed.\n");
         return 1;
     }
 
     printf("Enter a line of text: ");
-    fflush(stdin);
-    gets(str);
+    
+    
+    fflush(stdin); 
 
-    len = strlen(str);
 
-    printf("Reversed string: ");
-    for (i = len - 1; i >= 0; i--) {
-        printf("%c", str[i]);
+    if (fgets(str, 100, stdin) != NULL) {
+        
+        str[strcspn(str, "\n")] = 0; 
+
+        len = strlen(str);
+
+        printf("Reversed string: ");
+        for (i = len - 1; i >= 0; i--) {
+            printf("%c", str[i]);
+        }
+        printf("\n");
     }
-    printf("\n");
 
     free(str);
     return 0;
